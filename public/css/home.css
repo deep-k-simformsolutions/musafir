@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+    box-sizing: border-box;
+}
+.page1 {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../images/home_slider.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+header {
+    position:absolute;
+    top:40px;
+    left:0;
+    width: 100%;
+    padding:20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index:1000;
+}
+header .logo{
+    position:relative;
+    left:50px;
+    color:white;
+    text-decoration:none;
+    font-size:30px;
+    font-weight:700;
+}
+header .menu{
+    position:relative;
+    color:white;
+    width:250px;
+    text-decoration:none;
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:space-between;  
+}
+header .menu a{
+    position:relative;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    margin-left:15%;
+}
+header .contact{
+    position:relative;
+    right:50px;
+    color:white;
+    text-align:center;
+}
+main{
+    position:relative;
+    top:150px;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items:center;
+}
+.main_text{
+    position:relative;
+    font-size: 100px;
+    font-weight: 600;
+    letter-spacing: 3px;  
+}
+
+main section div {
+    position:relative;
+    color:black;
+    text-align: center;
+    padding:8vh 0;
+    margin: 10vh -20vh 10vh -20vh;
+    border-style: none;
+    border-radius: 10px;
+    background-color:rgba(255, 255, 255,0.3);
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;  
+}
+.simple_text{
+    position:relative;
+    padding:10px 0;
+    margin:0 450px;
+    border-style:none;
+    border-radius: 10px 10px 0 0 ;
+    background-color:white;
+}
+section div form{
+    position:relative;
+    display:flex;flex-wrap:wrap; justify-content:center;
+    align-items:center;
+    background-color:white;
+    margin:0 30px 0 30px;
+}
+form input {
+    position:relative;
+    color:black;
+    background-color:rgba(128, 128, 128,0.1);
+    width: 300px;height: 6vh;
+    margin: 15px;
+    font-size:medium;letter-spacing:3px;
+    border:none;border-radius:4px;  
+}
+#city,#budget{
+    text-align:center;
+}
+form button {
+    position:relative;
+    color:white;background-color: black;
+    width: 150px;height: 6vh;
+    margin: 15px;
+    font-size: large;letter-spacing:1px;
+    border: none;border-radius:15px;    
+}
+.page2 {
+    position: relative;
+    justify-content:space-between;
+    align-items: center;
+    min-height: 100vh;
+}
+.simple_text2 {
+    position:relative;
+    top:20px;
+    text-align:center;
+    color:gray;
+    font-size:medium;letter-spacing:4px;
+    text-transform:uppercase;
+}
+.simple_text3 {
+    position:relative;
+    width:100%;
+    top:20px;
+    color: black;
+    display: flex;flex-wrap:wrap; justify-content:space-around;align-items:center;
+    font-size:50px;letter-spacing: 2px;
+}
+.cites{
+    position:relative;
+    top:40px;
+    width:100%;
+    display:flex;flex-wrap:wrap;justify-content:space-around;align-items:flex-start;
+}
+.city1, .city2, .city3 {
+    display: flex;
+    margin-top:5px;
+    flex-direction:column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    min-width: 23%;
+}
+.cites h4, h5, h6 {
+    text-align:center;
+    width: 100%;
+}
+@media (max-width: 700px) {
+    .page1 {
+        width:650px;
+    }
+    header {
+        width:60%;
+        top: 0;
+        left: 0;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:flex-start;
+    }
+    header .logo {
+        left:0;
+        font-size: 25px;
+        font-weight: 600;
+    }
+    header .menu{
+        margin-top:25px;
+        justify-content:space-between;  
+        flex-direction:column;
+    }
+    header .contact{
+        right:0;
+        margin-top:20px;
+        font-size:15px;
+    }
+    .main_text {
+        top:70px;
+        font-size: 70px;
+        font-weight: 600;
+        letter-spacing: 3px;
+    }
+    main section div {
+        background:none;    
+    }
+    .simple_text {
+        padding: 0;
+        margin: 0;
+        background : none;
+    }
+    section div form {
+        flex-direction: column;
+        background:none;
+    }
+    form input {
+        position: relative;
+        color: black;
+        background-color: rgba(255,255,255,0.9);
+    }
+}
