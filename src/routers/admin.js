@@ -27,20 +27,20 @@ router.post('/admin/login',async (req,res)=>{
 
 router.post('/admin/logout',adminauth,async (req,res)=>{
     try {
-        req.admin.tokens = req.user.tokens.filter((token)=>{
+        req.admin.tokens = req.admin.tokens.filter((token)=>{
             return token.token !== req.token
         })
         await req.admin.save()
         res.send()
     } catch (error) {
-        req.status(400).send()
+        res.status(400).send()
     }
 })
 
 router.get('/admin/me',adminauth,async (req,res)=>{
     res.send(req.admin)
 })
-router.get('/admin/:id',adminauth,async (req,res)=>{
+router.get('/admin/:id',async (req,res)=>{
     const id = req.params.id
     try {
         const admin = await Admin.findById(id)
@@ -54,7 +54,7 @@ router.get('/admin/:id',adminauth,async (req,res)=>{
 })
 router.patch('/admin/me',adminauth,async (req,res)=>{
     const keyarray = ['name','email','password']
-    const update = Object.key(req.body)
+    const update = Object.keys(req.body)
     const isContain = update.every((update)=>{
         return keyarray.includes(update)
     })
@@ -78,7 +78,7 @@ router.delete('/admin/me',adminauth,async (req,res)=>{
        res.send()
        }
     catch (error) {
-       res.status(500).send(error)
+       res.status(400).send(error)
     }
 })
 

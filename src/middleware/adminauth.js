@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken')
-const Admin = require('../models/user')
+const Admin = require('../models/admin')
 
 const adminauth = async (req,res,next) =>{
     try {
         const token = req.header('Authorization').replace('Bearer ','')
         const decoded = jwt.verify(token,process.env.JWT_SECRET)
-        const admin = Admin.findOne({_id:decoded._id,'tokens.token':token})
+        const admin = await Admin.findOne({_id:decoded._id,'tokens.token':token})
         if(!admin){
             throw new Error()
         }

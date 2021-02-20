@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require('path')
-const postRouter = require('./routers/events')
 const adminRouter = require('./routers/admin')
+const eventRouter = require('./routers/event')
+const userRouter = require('./routers/user')
 
 
 const app = express()
@@ -16,8 +17,8 @@ const port = process.env.PORT || 3000
 app.use(express.static(publicPath))
 app.use(express.json())
 app.use(adminRouter)
-app.use(postRouter)
-
+app.use(eventRouter)
+app.use(userRouter)
 app.listen(port,()=>{
     console.log(`server is on port ${port}!`)
 })

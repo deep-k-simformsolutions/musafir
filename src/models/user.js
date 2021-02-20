@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
+var mongooseTypePhone = require('mongoose-type-phone');
 const validator = require('validator')
 const jwt= require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const Task = require('./task')
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
+        require:true,
         trim:true,  
         unique:true,
         lowercase:true,
@@ -39,6 +40,10 @@ const userSchema = new mongoose.Schema({
                 throw new Error('age is not a negative number')
             }
         }
+    },
+    phone:{
+        type:Number,
+        require:true
     },
     tokens:[{
         token:{
@@ -93,11 +98,11 @@ userSchema.pre('save',async function (next){        //here we can not use arrow 
     next()
 })
 
-userSchema.pre('remove',async function(next){
+/*userSchema.pre('remove',async function(next){
     const user = this
     await Task.deleteMany({owner:user._id})
     next()
-})
+})*/
 
 const User = mongoose.model('User',userSchema)
 module.exports = User

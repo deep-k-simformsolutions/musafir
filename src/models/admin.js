@@ -1,5 +1,5 @@
 const mongoose = require('../db/events')
-const validate = require('validator')
+const validater = require('validator')
 const jwt= require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
@@ -40,6 +40,11 @@ const adminSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
+adminSchema.virtual('events',{
+    ref:'Event',
+    localField:'_id',
+    foreignField:'owner'
+})
 
 adminSchema.methods.toJSON = function(){  
     const admin = this
@@ -51,7 +56,7 @@ adminSchema.methods.toJSON = function(){
 adminSchema.methods.generateAuthToken = async function(){ 
     const admin = this              
     const token = await jwt.sign({ _id: admin._id.toString() },process.env.JWT_SECRET)
-    admin.tokens = user.tokens.concat({ token })
+    admin.tokens = admin.tokens.concat({ token })
     await admin.save()
     return token
 }

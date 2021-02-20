@@ -10,7 +10,7 @@ router.post('/users',async (req,res)=>{
     const user = new User(req.body)
     try{
         await user.save()
-        //sendWelcomeEmail(user.email, user.name)
+        sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
         res.send({user , token})
     }
@@ -36,7 +36,7 @@ router.post('/users/logout',auth,async (req,res)=>{
         await req.user.save()
         res.send()
     } catch (error) {
-        res.status(500).send()   
+        res.status(500).send(error)   
     }
 })
 router.post('/users/logoutall', auth, async(req,res)=>{
@@ -51,30 +51,11 @@ router.post('/users/logoutall', auth, async(req,res)=>{
 })
 
 router.get('/users/me',auth,async (req,res)=>{
-    /*User.find({}).then((user)=>{
-        res.send(user)
-    }).catch((error)=>{
-        res.status(500).send
-    })*/
-    /*try {
-        const user = await User.find({})
-        res.send(user)
-    } catch (error) {
-        res.status(500).send()
-    }*/
     res.send(req.user)
 })
 
 router.get('/users/:id', async (req,res)=>{
     const id = req.params.id
-    /*User.findById(id).then((user)=>{
-        if(!user){
-           return res.status(404).send()
-        }
-        res.send(user)
-    }).catch((error)=>{
-        res.status(500).send(error)
-    })*/
     try {
         const user = await User.findById(id)
         if(!user){
@@ -86,7 +67,7 @@ router.get('/users/:id', async (req,res)=>{
     }
     })
  router.patch('/users/me',auth,async (req,res)=>{
-     const keyarray = ['name','email','password','age']
+     const keyarray = ['name','email','password','age','phone']
      const update = Object.keys(req.body)
      const isvalidoperation = update.every((update)=>{
          return keyarray.includes(update)
@@ -150,14 +131,14 @@ router.delete('/users/me/avatar',auth,async (req,res)=>{
     await req.user.save()
     res.status(200).send()
 })
-router.get('/users/:id/avatar',async (req,res)=>{
+router.get('/users/me/avatar',auth,async (req,res)=>{
     try {
-        const user = await User.findById(req.params.id)
-        if(!user || !user.avatar){
+        //const user = await User.findById(req.params.id)
+        if(!req.user || !req.user.avatar){
             throw new Error()
         }
         res.set('Content-Type','image/png')
-        res.send(user.avatar)
+        res.send(req.user.avatar)
     } catch (error) {
         res.status(404).send(error)
     }
